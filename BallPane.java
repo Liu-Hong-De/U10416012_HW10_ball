@@ -12,11 +12,10 @@ public class BallPane extends Pane {
 	public final double radius = 20;
 	private double x = radius, y = radius;
 	private double dx = 1, dy = 1;
-	private Circle circle = new Circle(x, y, radius);
-	private Timeline animation;
+	private Circle circle = new Circle(x, y, radius, new Color(Math.random(),Math.random(), Math.random(), 0.8));
+	private Timeline animation;						//use random to change the ball color
 	
 	public BallPane() {
-		circle.setFill(Color.GREEN);	// Set ball color
 		getChildren().add(circle);	// Place a ball into this pane
 		// Create an animation for moving the ball
 		animation = new Timeline(new KeyFrame(Duration.millis(50), e -> moveBall()));
@@ -30,6 +29,8 @@ public class BallPane extends Pane {
 	
 	public void pause() {
 		animation.pause();
+		Color color = new Color(Math.random(), Math.random(), Math.random(), 0.8);
+		circle.setFill(color);	//change the ball color when user enter mouse
 	}
 	
 	public void increaseSpeed() {
@@ -45,7 +46,7 @@ public class BallPane extends Pane {
 	}
 	
 	protected void moveBall() {
-		// Check boundaries
+		// Checkboundaries
 		if(x < radius || x > getWidth() - radius) {
 			dx *= -1;	// Change ball move direction
 		}
